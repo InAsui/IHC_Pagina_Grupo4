@@ -1,10 +1,154 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página Web</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #5AABA5;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Efecto de difuminado en la parte inferior */
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.2));
+            pointer-events: none;
+        }
+
+        nav {
+            background-color: #91D3CF;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-left, .nav-right {
+            display: flex;
+            gap: 1rem;
+        }
+
+        button {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            min-height: calc(100vh - 70px);
+            gap: 2rem;
+        }
+
+        .logo-container {
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        .start-button {
+            background-color: #91D3CF;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .start-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Diseño responsivo */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-left, .nav-right {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .logo-container {
+                max-width: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
+<nav>
+    <div class="nav-left">
+        <button>Inicio</button>
+        <button>Sobre Nosotros</button>
+    </div>
+    <div class="nav-right">
+        <button>Iniciar Sesión</button>
+        <button>Registrarse</button>
+    </div>
+</nav>
 
+<main class="main-content">
+    <div class="logo-container">
+        <img src="logo.png" alt="Logo de la empresa">
+    </div>
+    <button class="start-button">Comenzar</button>
+</main>
+
+<script>
+    // Añadir interactividad a los botones
+    document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', function() {
+            // Aquí puedes agregar la funcionalidad específica para cada botón
+            console.log('Botón clickeado:', this.textContent);
+        });
+    });
+
+    // Verificar que la imagen del logo se cargue correctamente
+    document.querySelector('.logo-container img').addEventListener('error', function() {
+        console.error('Error al cargar el logo');
+        this.src = 'ruta-imagen-fallback.png'; // Imagen de respaldo en caso de error
+    });
+</script>
 </body>
 </html>
