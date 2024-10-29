@@ -4,151 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Página Web</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background: #5AABA5;
-            min-height: 100vh;
-            position: relative;
-        }
-
-        /* Efecto de difuminado en la parte inferior */
-        body::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.2));
-            pointer-events: none;
-        }
-
-        nav {
-            background-color: #91D3CF;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .nav-left, .nav-right {
-            display: flex;
-            gap: 1rem;
-        }
-
-        button {
-            background: none;
-            border: none;
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            font-size: 1rem;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
-
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            min-height: calc(100vh - 70px);
-            gap: 2rem;
-        }
-
-        .logo-container {
-            max-width: 300px;
-            width: 100%;
-        }
-
-        .logo-container img {
-            width: 100%;
-            height: auto;
-        }
-
-        .start-button {
-            background-color: #91D3CF;
-            color: white;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .start-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        /* Diseño responsivo */
-        @media (max-width: 768px) {
-            nav {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-left, .nav-right {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .main-content {
-                padding: 1rem;
-            }
-
-            .logo-container {
-                max-width: 200px;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Inter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/styles/styles.css">
 </head>
 <body>
-<nav>
-    <div class="nav-left">
-        <button>Inicio</button>
-        <button>Sobre Nosotros</button>
-    </div>
-    <div class="nav-right">
-        <button>Iniciar Sesión</button>
-        <button>Registrarse</button>
-    </div>
-</nav>
+<!-- Página Principal -->
+<div id="main-page">
+    <nav>
+        <div class="nav-left">
+            <button>Inicio</button>
+            <button>Sobre Nosotros</button>
+        </div>
+        <div class="nav-right">
+            <button id="login-btn">Iniciar Sesión</button>
+            <button>Registrarse</button>
+        </div>
+    </nav>
 
-<main class="main-content">
-    <div class="logo-container">
-        <img src="logo.png" alt="Logo de la empresa">
+    <main class="main-content">
+        <div class="logo-container">
+            <img src="./assets/images/logo.png" alt="Logo de la empresa">
+        </div>
+        <button class="start-button">Comenzar</button>
+    </main>
+</div>
+
+<!-- Página de Login -->
+<div id="login-page" class="hidden">
+    <div class="login-container">
+        <div class="logo-container">
+            <img src="./assets/images/logo.png" alt="Logo de la empresa">
+        </div>
+
+        <form id="login-form">
+            <div class="input-group">
+                <input type="email" placeholder="Correo" required>
+            </div>
+            <div class="input-group">
+                <input type="password" placeholder="Contraseña" required>
+            </div>
+
+            <div class="forgot-password">
+                <a href="#">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <div class="divider">
+                <span>iniciar sesión con</span>
+            </div>
+
+            <div class="social-login">
+                <img src="./assets/images/google-logo.png" alt="Google" class="social-icon">
+                <img src="./assets/images/apple-logo.png" alt="Apple" class="social-icon">
+                <img src="./assets/images/facebook-logo.png" alt="Facebook" class="social-icon">
+            </div>
+
+            <button type="button" id="back-btn" class="back-button">Volver</button>
+        </form>
     </div>
-    <button class="start-button">Comenzar</button>
-</main>
+</div>
 
-<script>
-    // Añadir interactividad a los botones
-    document.querySelectorAll('button').forEach(button => {
-        button.addEventListener('click', function() {
-            // Aquí puedes agregar la funcionalidad específica para cada botón
-            console.log('Botón clickeado:', this.textContent);
-        });
-    });
-
-    // Verificar que la imagen del logo se cargue correctamente
-    document.querySelector('.logo-container img').addEventListener('error', function() {
-        console.error('Error al cargar el logo');
-        this.src = 'ruta-imagen-fallback.png'; // Imagen de respaldo en caso de error
-    });
-</script>
+<script src="./assets/scripts/main.js"></script>
 </body>
 </html>
