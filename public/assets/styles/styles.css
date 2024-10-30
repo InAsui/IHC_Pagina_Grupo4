@@ -25,7 +25,7 @@ body::after {
     z-index: 0;
 }
 
-/* Estilos de la página principal */
+/* Estilos de navegación */
 nav {
     background-color: #91D3CF;
     padding: 1rem;
@@ -50,7 +50,7 @@ nav button {
     font-size: 1rem;
     border-radius: 25px;
     font-family: 'Roboto', sans-serif;
-    color: #C7DFCE;
+    color: #fff;
     transition: all 0.3s ease;
 }
 
@@ -59,6 +59,7 @@ nav button:hover {
     transform: scale(1.05);
 }
 
+/* Estilos del contenido principal */
 .main-content {
     display: flex;
     flex-direction: column;
@@ -74,6 +75,7 @@ nav button:hover {
 .logo-container {
     max-width: 300px;
     width: 100%;
+    margin: 2rem auto;
 }
 
 .logo-container img {
@@ -83,7 +85,7 @@ nav button:hover {
 
 .start-button {
     background-color: #91D3CF;
-    color: #C7DFCE;
+    color: white;
     padding: 1rem 2.5rem;
     font-size: 1.2rem;
     border: none;
@@ -98,20 +100,141 @@ nav button:hover {
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 
-/* Estilos de la página de login */
-#login-page {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+/* Estilos de la página de inicio */
+.home-content {
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
 }
 
+.videos-section, .forums-section {
+    margin: 2rem 0;
+}
+
+.videos-section h2, .forums-section h2 {
+    color: white;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.video-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.video-placeholder {
+    width: 100%;
+    padding-top: 56.25%; /* Aspecto 16:9 */
+    background: #e0e0e0;
+}
+
+.video-card h3 {
+    padding: 1rem;
+    color: #5AABA5;
+}
+
+.video-card p {
+    padding: 0 1rem 1rem;
+    color: #666;
+}
+
+/* Estilos de los foros */
+.forums-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.forum-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.forum-card h3 {
+    color: #5AABA5;
+    margin-bottom: 1rem;
+}
+
+.forum-card p {
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.replies {
+    display: block;
+    color: #91D3CF;
+    margin-bottom: 1rem;
+}
+
+.join-button {
+    background-color: #5AABA5;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.join-button:hover {
+    background-color: #91D3CF;
+    transform: scale(1.05);
+}
+
+/* Estilos de Sobre Nosotros */
+.about-content {
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card img {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 1rem;
+}
+
+.card h2 {
+    color: #5AABA5;
+    margin-top: 1rem;
+}
+
+/* Estilos de login */
 .login-container {
     background: white;
     padding: 2.5rem;
@@ -120,10 +243,12 @@ nav button:hover {
     width: 100%;
     max-width: 400px;
     text-align: center;
+    margin: 2rem auto;
 }
 
 .input-group {
     margin-bottom: 1.5rem;
+    position: relative;
 }
 
 .input-group input {
@@ -141,6 +266,10 @@ nav button:hover {
     opacity: 0.6;
 }
 
+.input-group.focused input::placeholder {
+    opacity: 0;
+}
+
 .forgot-password {
     text-align: right;
     margin-bottom: 1.5rem;
@@ -152,6 +281,167 @@ nav button:hover {
     font-size: 0.9rem;
 }
 
+.login-button {
+    background-color: #5AABA5;
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #91D3CF;
+}
+
+/* Estilos para modales */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #5AABA5;
+}
+
+/* Estilos para el modal del foro */
+.forum-messages {
+    margin: 1rem 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.forum-message {
+    background: #f5f5f5;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.message-input {
+    margin-top: 1rem;
+}
+
+.message-input textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.message-input button {
+    background-color: #5AABA5;
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.message-input button:hover {
+    background-color: #91D3CF;
+}
+
+/* Utilidades */
+.hidden {
+    display: none !important;
+}
+
+/* Diseño responsivo */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0.5rem;
+    }
+
+    .nav-left, .nav-right {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .main-content {
+        padding: 1rem;
+    }
+
+    .logo-container {
+        max-width: 200px;
+    }
+
+    .info-cards {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    .videos-grid, .forums-container {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Animaciones */
+@keyframes slideIn {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    animation: slideIn 0.3s ease-out;
+}
+
+/* Estilos para el divisor social */
 .divider {
     display: flex;
     align-items: center;
@@ -171,11 +461,12 @@ nav button:hover {
     font-size: 0.9rem;
 }
 
+/* Estilos para iconos sociales */
 .social-login {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    margin-top: 1.5rem;
+    margin: 1.5rem 0;
 }
 
 .social-icon {
@@ -198,117 +489,9 @@ nav button:hover {
     border-radius: 25px;
     cursor: pointer;
     font-family: 'Roboto', sans-serif;
+    transition: all 0.3s ease;
 }
 
-.hidden {
-    display: none !important;
-}
-
-/* Diseño responsivo */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .nav-left, .nav-right {
-        width: 100%;
-        justify-content: center;
-    }
-
-    .main-content {
-        padding: 1rem;
-    }
-
-    .logo-container {
-        max-width: 200px;
-    }
-
-    .login-container {
-        margin: 1rem;
-        padding: 1.5rem;
-    }
-}
-/* Agregar estos estilos al final de tu archivo styles.css */
-
-/* Estilos para la transición de páginas */
-#main-page, #login-page {
-    transition: opacity 0.3s ease;
-}
-
-/* Estilos para los campos de entrada */
-.input-group {
-    position: relative;
-    margin-bottom: 2rem;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 0.8rem;
-    border: none;
-    border-bottom: 2px solid #92B89D;
-    font-size: 1rem;
-    outline: none;
-    background: transparent;
-    transition: border-color 0.3s ease;
-}
-
-.input-group input::placeholder {
-    color: #92B89D;
-    opacity: 0.6;
-    transition: opacity 0.3s ease;
-}
-
-.input-group.focused input::placeholder,
-.input-group.has-text input::placeholder {
-    opacity: 0;
-}
-
-/* Estilos para los botones sociales */
-.social-login {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin: 2rem 0;
-}
-
-.social-icon {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-/* Estilos para la animación del formulario */
-.login-container {
-    animation: slideIn 0.3s ease-out;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-/* Mejoras en el diseño responsivo */
-@media (max-width: 768px) {
-    .login-container {
-        width: 90%;
-        margin: 1rem;
-        padding: 1.5rem;
-    }
-
-    .social-login {
-        gap: 1rem;
-    }
-
-    .social-icon {
-        width: 35px;
-        height: 35px;
-    }
+.back-button:hover {
+    background-color: #5AABA5;
 }

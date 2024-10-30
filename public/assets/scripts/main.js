@@ -1,96 +1,153 @@
-// Elementos DOM
-const mainPage = document.getElementById('main-page');
-const loginPage = document.getElementById('login-page');
-const loginBtn = document.getElementById('login-btn');
-const backBtn = document.getElementById('back-btn');
-const loginForm = document.getElementById('login-form');
+// Gestión de páginas
+function showPage(pageId) {
+    // Ocultar todas las páginas
+    const pages = ['main-page', 'home-page', 'about-page', 'login-page'];
+    pages.forEach(page => {
+        const element = document.getElementById(page);
+        if (element) {
+            element.classList.add('hidden');
+        }
+    });
 
-// Mostrar página de login con efecto
-loginBtn.addEventListener('click', () => {
-    // Ocultar la página principal con una transición suave
-    mainPage.style.transition = 'opacity 0.3s ease';
-    mainPage.style.opacity = '0';
+    // Mostrar la página solicitada
+    const pageToShow = document.getElementById(pageId);
+    if (pageToShow) {
+        pageToShow.classList.remove('hidden');
+    }
+}
 
-    setTimeout(() => {
-        mainPage.style.display = 'none';
-        loginPage.classList.remove('hidden');
-
-        // Mostrar la página de login con una transición suave
-        loginPage.style.transition = 'opacity 0.3s ease';
-        loginPage.style.opacity = '0';
-
-        requestAnimationFrame(() => {
-            loginPage.style.opacity = '1';
-        });
-    }, 300);
+// Gestión de login
+const loginButtons = document.querySelectorAll('#login-btn, #login-btn-home, #login-btn-about');
+loginButtons.forEach(btn => {
+    btn.addEventListener('click', () => showPage('login-page'));
 });
 
-// Volver a la página principal
-backBtn.addEventListener('click', () => {
-    // Ocultar la página de login
-    loginPage.style.opacity = '0';
+// Gestión de modales
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.classList.remove('hidden');
+}
 
-    setTimeout(() => {
-        loginPage.classList.add('hidden');
-        mainPage.style.display = 'block';
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    modal.classList.add('hidden');
+}
 
-        requestAnimationFrame(() => {
-            mainPage.style.opacity = '1';
+// Contenido de "Sobre Nosotros"
+const aboutContent = {
+    'quienes-somos': {
+        title: '¿Quiénes somos?',
+        content: 'Aquí va el contenido sobre quiénes somos...'
+    },
+    'que-buscamos': {
+        title: '¿Qué buscamos?',
+        content: 'Aquí va el contenido sobre qué buscamos...'
+    },
+    'como-trabajamos': {
+        title: '¿Cómo trabajamos?',
+        content: 'Aquí va el contenido sobre cómo trabajamos...'
+    }
+};
+
+function showDetails(section) {
+    const content = aboutContent[section];
+    const container = document.getElementById('modal-content-container');
+    container.innerHTML = `
+        <h2>${content.title}</h2>
+        <div class="content">
+            ${content.content}
+        </div>
+    `;
+    openModal('details-modal');
+}
+
+// Gestión de foros
+let currentForumId = null;
+const forumData = {
+    1: {
+        title: 'Tema del Foro 1',
+        messages: [
+            { user: 'Usuario1', message: 'Primer mensaje del foro', timestamp: '2024-01-01 10:00' },
+            { user: 'Usuario2', message: 'Respuesta al primer mensaje', timestamp: '2024-01-01 10:05' }
+        ]
+    },
+    2: {
+        title: 'Tema del Foro 2',
+        messages: [
+            { user: 'Usuario3', message: 'Iniciando nueva discusión', timestamp: '2024-01-02 15:00' }
+        ]
+    }
+};
+
+function openForum(forumId) {
+    currentForumId = forumId;
+    const forum = forumData[forumId];
+    document.getElementById('forum-title').textContent = forum.title;
+    updateForumMessages();
+    openModal('forum-modal');
+}
+
+function updateForumMessages() {
+    const messagesContainer = document.getElementById('forum-messages');
+    const forum = forumData[currentForumId];
+
+    messagesContainer.innerHTML = forum.messages.map(msg => `
+        <div class="forum-message">
+            <div class="message-header">
+                <span class="user">${msg.user}</span>
+                <span class="timestamp">${msg.timestamp}</span>
+            </div>
+            <div class="message-content">${msg.message}</div>
+        </div>
+    `).join('');
+}
+
+function sendMessage() {
+    const textarea = document.querySelector('.message-input textarea');
+    const message = textarea.value.trim();
+
+    if (message && currentForumId) {
+        const newMessage = {
+            user: 'Usuario Actual', // Esto debería venir de un sistema de autenticación
+            message: message,
+            timestamp: new Date().toLocaleString()
+        };
+
+        forumData[currentForumId].messages.push(newMessage);
+        updateForumMessages();
+        textarea.value = '';
+    }
+}
+
+// Inicialización
+document.addEventListener('DOMContentLoaded', () => {
+    // Manejo de clics fuera de los modales
+    window.addEventListener('click', (e) => {
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
         });
-    }, 300);
+    });
+
+    // Inicializar la página principal
+    showPage('main-page');
 });
 
-// Animación para los campos de entrada
+// Animaciones para campos de entrada
 document.querySelectorAll('.input-group input').forEach(input => {
-    // Agregar efecto de enfoque
     input.addEventListener('focus', function() {
-        this.style.transition = 'border-color 0.3s ease';
-        this.style.borderColor = '#5AABA5';
         this.parentElement.classList.add('focused');
     });
 
-    // Remover efecto al perder el enfoque
     input.addEventListener('blur', function() {
-        this.style.borderColor = '#92B89D';
         if (!this.value) {
             this.parentElement.classList.remove('focused');
         }
     });
 
-    // Manejar el estado activo cuando hay texto
     input.addEventListener('input', function() {
-        if (this.value) {
-            this.parentElement.classList.add('has-text');
-        } else {
-            this.parentElement.classList.remove('has-text');
-        }
-    });
-});
-
-// Efecto hover para los botones sociales
-document.querySelectorAll('.social-icon').forEach(icon => {
-    icon.addEventListener('mouseenter', function() {
-        this.style.transform = 'scale(1.1)';
-        this.style.transition = 'transform 0.3s ease';
-    });
-
-    icon.addEventListener('mouseleave', function() {
-        this.style.transform = 'scale(1)';
-    });
-});
-
-// Manejo del formulario de login
-loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    // Aquí puedes agregar la validación del formulario
-    console.log('Formulario enviado');
-});
-
-// Verificar que las imágenes se carguen correctamente
-document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('error', function() {
-        console.error('Error al cargar imagen:', this.src);
-        // Puedes agregar una imagen de respaldo si lo deseas
-        // this.src = 'assets/images/fallback-image.png';
+        this.parentElement.classList.toggle('has-text', this.value.length > 0);
     });
 });
