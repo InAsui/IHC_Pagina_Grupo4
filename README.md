@@ -15,6 +15,7 @@ Plataforma educativa diseñada para facilitar la conexión entre educadores y re
 - Sistema de autenticación de usuarios
 - Navegación intuitiva
 - Secciones: Foros, Videos, Anuncios y Cursos
+- Sobre nosotros
 - Modo oscuro
 - Diseño responsive
 - Panel de control de usuario
