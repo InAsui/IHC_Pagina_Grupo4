@@ -1,7 +1,5 @@
-// Almacenamiento de usuarios
 let usuarios = [];
 
-// Función para mostrar el modal de inicio de sesión
 function mostrarInicioSesion() {
     const modal = document.getElementById('modal-inicio-sesion');
     modal.style.display = 'flex';
@@ -10,7 +8,6 @@ function mostrarInicioSesion() {
     }, 10);
 }
 
-// Función para cerrar el modal de inicio de sesión
 function cerrarInicioSesion() {
     const modal = document.getElementById('modal-inicio-sesion');
     modal.style.opacity = '0';
@@ -19,7 +16,6 @@ function cerrarInicioSesion() {
     }, 300);
 }
 
-// Función para mostrar el modal de registro
 function mostrarRegistro() {
     const modal = document.getElementById('modal-registro');
     modal.style.display = 'flex';
@@ -28,7 +24,6 @@ function mostrarRegistro() {
     }, 10);
 }
 
-// Función para cerrar el modal de registro
 function cerrarRegistro() {
     const modal = document.getElementById('modal-registro');
     modal.style.opacity = '0';
