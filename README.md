@@ -4,11 +4,11 @@ Plataforma educativa diseñada para facilitar la conexión entre educadores y re
 
 ## Autores
 
--Frisancho Talla, Yerico Juan Carlos
--Poma Muñoz, Ariadna Geraldine
--Torres Neyra, Nicole Consuelo
--Velarde Sarmiento, Fernando Jose
--Vilca Villanueva, Reynaldo Fabio
+- Frisancho Talla, Yerico Juan Carlos
+- Poma Muñoz, Ariadna Geraldine
+- Torres Neyra, Nicole Consuelo
+- Velarde Sarmiento, Fernando Jose
+- Vilca Villanueva, Reynaldo Fabio
 
 ## Características
 
