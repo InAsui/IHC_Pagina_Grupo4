@@ -4,181 +4,252 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Página Web</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Inter&display=swap" rel="stylesheet">
+    <!-- Enlace a fuentes de Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="./assets/styles/styles.css">
 </head>
 <body>
-<!-- Página Principal -->
-<div id="main-page">
-    <nav>
-        <div class="nav-left">
-            <button onclick="showPage('home-page')">Inicio</button>
-            <button onclick="showPage('about-page')">Sobre Nosotros</button>
+<!-- Barra de navegación superior -->
+<nav class="barra-navegacion">
+    <div class="navegacion-izquierda">
+        <button class="boton-nav" onclick="mostrarInicio()">Inicio</button>
+        <button class="boton-nav" onclick="mostrarSobreNosotros()">Sobre Nosotros</button>
+    </div>
+    <div class="navegacion-derecha">
+        <button class="boton-nav" onclick="mostrarInicioSesion()">Iniciar sesión</button>
+        <button class="boton-nav" onclick="mostrarRegistro()">Registrarse</button>
+        <div class="contenedor-usuario" onclick="toggleBarraLateral()" style="display: none;">
+            <img src="./assets/images/icono-usuario.png" alt="Usuario" class="icono-usuario">
+            <span id="nombre-usuario">Usuario</span>
         </div>
-        <div class="nav-right">
-            <button id="login-btn">Iniciar Sesión</button>
-            <button>Registrarse</button>
-        </div>
-    </nav>
-
-    <main class="main-content">
-        <div class="logo-container">
-            <img src="./assets/images/logo.png" alt="Logo de la empresa">
-        </div>
-        <button class="start-button">Comenzar</button>
-    </main>
+    </div>
+</nav>
+<!-- NUEVO: Barra Lateral de Navegación -->
+<div class="barra-lateral" id="barra-lateral">
+    <div class="logo-barra-lateral">
+        <img src="logo.png" alt="Logo Incluteach">
+        <h2 class="texto-incluteach">Incluteach</h2>
+    </div>
+    <div class="opciones-barra-lateral">
+        <button onclick="mostrarSeccion('mis-anuncios')">
+            <i class="fas fa-bullhorn"></i> Mis Anuncios
+        </button>
+        <button onclick="mostrarSeccion('mis-foros')">
+            <i class="fas fa-comments"></i> Mis Foros
+        </button>
+        <button onclick="mostrarSeccion('mensajes')">
+            <i class="fas fa-envelope"></i> Mensajes
+        </button>
+        <button onclick="mostrarSeccion('notificaciones')">
+            <i class="fas fa-bell"></i> Notificaciones
+        </button>
+        <button onclick="mostrarSeccion('ajustes')">
+            <i class="fas fa-cog"></i> Ajustes
+        </button>
+    </div>
 </div>
-
-<!-- Página de Inicio -->
-<div id="home-page" class="hidden">
-    <nav>
-        <!-- Mismo nav que arriba -->
-        <div class="nav-left">
-            <button onclick="showPage('home-page')">Inicio</button>
-            <button onclick="showPage('about-page')">Sobre Nosotros</button>
+<!-- Secciones de Contenido -->
+<div class="secciones-contenido">
+    <div id="mis-anuncios" class="seccion">
+        <h2>Mis Anuncios</h2>
+        <!-- Contenido de anuncios -->
+    </div>
+    <div id="mis-foros" class="seccion">
+        <h2>Mis Foros</h2>
+        <!-- Contenido de foros -->
+    </div>
+    <div id="mensajes" class="seccion">
+        <h2>Mensajes</h2>
+        <!-- Contenido de mensajes -->
+    </div>
+    <div id="notificaciones" class="seccion">
+        <h2>Notificaciones</h2>
+        <!-- Contenido de notificaciones -->
+    </div>
+    <div id="ajustes" class="seccion">
+        <h2>Ajustes</h2>
+        <div class="grupo-ajustes">
+            <h3>Preferencias</h3>
+            <select id="selector-idioma">
+                <option>Español</option>
+                <option>Inglés</option>
+            </select>
         </div>
-        <div class="nav-right">
-            <button id="login-btn-home">Iniciar Sesión</button>
-            <button>Registrarse</button>
+
+        <div class="grupo-ajustes">
+            <h3>Cuenta</h3>
+            <button>Cambiar Contraseña</button>
+            <button>Editar Perfil</button>
         </div>
-    </nav>
+    </div>
+</div>
+<!-- Barra lateral secundaria para ajustes -->
+<div class="barra-lateral-secundaria" id="barra-ajustes">
+    <div class="opciones-barra-lateral">
+        <div class="opcion-ajuste">
+            <i class="fas fa-moon"></i>
+            <span>Modo Oscuro</span>
+            <input type="checkbox" id="toggle-modo-oscuro">
+        </div>
+        <button class="opcion-ajuste" onclick="mostrarOpcionAjuste('contrasena')">
+            <i class="fas fa-key"></i> Cambiar Contraseña
+        </button>
+        <button class="opcion-ajuste" onclick="mostrarOpcionAjuste('notificaciones')">
+            <i class="fas fa-bell"></i> Notificaciones
+        </button>
+        <button class="opcion-ajuste" onclick="mostrarOpcionAjuste('privacidad')">
+            <i class="fas fa-lock"></i> Privacidad
+        </button>
+        <button class="opcion-ajuste" onclick="mostrarOpcionAjuste('idioma')">
+            <i class="fas fa-globe"></i> Idioma
+        </button>
+        <button class="opcion-ajuste" onclick="mostrarOpcionAjuste('tema')">
+            <i class="fas fa-paint-brush"></i> Tema
+        </button>
+        <button class="opcion-ajuste" onclick="cerrarSesion()">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+        </button>
+    </div>
+</div>
+<!-- Contenedor principal -->
+<div class="contenedor-principal">
+    <!-- Logo -->
+    <img src="./assets/images/logo.png" alt="Logo de la Empresa" class="logo">
 
-    <main class="home-content">
-        <section class="videos-section">
-            <h2>Videos Recientes</h2>
-            <div class="videos-grid">
-                <div class="video-card">
-                    <div class="video-placeholder"></div>
-                    <h3>Título del Video 1</h3>
-                    <p>Descripción breve del video</p>
-                </div>
-                <div class="video-card">
-                    <div class="video-placeholder"></div>
-                    <h3>Título del Video 2</h3>
-                    <p>Descripción breve del video</p>
-                </div>
-                <!-- Más videos aquí -->
-            </div>
-        </section>
+    <!-- Botón Comenzar -->
+    <button class="boton-comenzar">Comenzar</button>
+</div>
+<!--Sobre Nosotros Wa -->
+<div class="sobre-nosotros-seccion" style="display: none;">
+    <img src="./assets/images/logo.png" alt="Logo de la Empresa" class="logo">
+    <div class="recuadros-container">
+        <div class="recuadro" onclick="mostrarInformacion('quienes-somos')">
+            <img src="ruta-imagen-1.jpg" alt="¿Quiénes somos?" class="recuadro-imagen">
+            <h3>¿Quiénes somos?</h3>
+        </div>
+        <div class="recuadro" onclick="mostrarInformacion('que-buscamos')">
+            <img src="ruta-imagen-2.jpg" alt="¿Qué buscamos?" class="recuadro-imagen">
+            <h3>¿Qué buscamos?</h3>
+        </div>
+        <div class="recuadro" onclick="mostrarInformacion('como-trabajamos')">
+            <img src="ruta-imagen-3.jpg" alt="¿Cómo trabajamos?" class="recuadro-imagen">
+            <h3>¿Cómo trabajamos?</h3>
+        </div>
+    </div>
+    <!-- Modal para mostrar la información -->
+    <div id="modal-informacion" class="modal-informacion">
+        <div class="contenido-modal-informacion">
+            <span class="cerrar-modal" onclick="cerrarModalInformacion()">&times;</span>
+            <h2 id="titulo-modal-informacion"></h2>
+            <p id="contenido-modal-informacion"></p>
+        </div>
+    </div>
+</div>
+<!-- Agregar después de la sección "sobre-nosotros-seccion" y antes de los modales -->
+<div class="contenido-principal-seccion" style="display: none;">
+    <div class="contenido-navegacion">
+        <button class="tab-button active" onclick="cambiarTab('foros')">Foros</button>
+        <button class="tab-button" onclick="cambiarTab('videos')">Videos</button>
+        <button class="tab-button" onclick="cambiarTab('anuncios')">Anuncios</button>
+        <button class="tab-button" onclick="cambiarTab('cursos')">Cursos</button>
+    </div>
 
-        <section class="forums-section">
+    <div class="contenido-tabs">
+        <!-- Sección de Foros -->
+        <div id="foros" class="tab-content active">
             <h2>Foros de Discusión</h2>
-            <div class="forums-container">
-                <div class="forum-card">
-                    <h3>Tema del Foro 1</h3>
-                    <p>Última actividad: Hace 2 horas</p>
-                    <span class="replies">10 respuestas</span>
-                    <button onclick="openForum(1)" class="join-button">Unirse a la discusión</button>
+            <div class="grid-contenido">
+                <!-- Ejemplo de estructura de foro -->
+                <div class="tarjeta-contenido">
+                    <h3>Foro de Matemáticas</h3>
+                    <p>Discusiones sobre métodos de enseñanza en matemáticas</p>
+                    <button class="boton-accion">Unirse al foro</button>
                 </div>
-                <div class="forum-card">
-                    <h3>Tema del Foro 2</h3>
-                    <p>Última actividad: Hace 1 día</p>
-                    <span class="replies">25 respuestas</span>
-                    <button onclick="openForum(2)" class="join-button">Unirse a la discusión</button>
+                <div class="tarjeta-contenido">
+                    <h3>Foro de Lenguaje</h3>
+                    <p>Estrategias para la enseñanza de lectura y escritura</p>
+                    <button class="boton-accion">Unirse al foro</button>
                 </div>
             </div>
-        </section>
-    </main>
-</div>
-
-<!-- Página Sobre Nosotros -->
-<div id="about-page" class="hidden">
-    <nav>
-        <!-- Mismo nav que arriba -->
-        <div class="nav-left">
-            <button onclick="showPage('home-page')">Inicio</button>
-            <button onclick="showPage('about-page')">Sobre Nosotros</button>
-        </div>
-        <div class="nav-right">
-            <button id="login-btn-about">Iniciar Sesión</button>
-            <button>Registrarse</button>
-        </div>
-    </nav>
-
-    <main class="about-content">
-        <div class="logo-container">
-            <img src="./assets/images/logo.png" alt="Logo de la empresa">
         </div>
 
-        <div class="info-cards">
-            <div class="card" onclick="showDetails('quienes-somos')">
-                <img src="./assets/images/team.png" alt="¿Quiénes somos?">
-                <h2>¿Quiénes somos?</h2>
-            </div>
-
-            <div class="card" onclick="showDetails('que-buscamos')">
-                <img src="./assets/images/goal.png" alt="¿Qué buscamos?">
-                <h2>¿Qué buscamos?</h2>
-            </div>
-
-            <div class="card" onclick="showDetails('como-trabajamos')">
-                <img src="./assets/images/work.png" alt="¿Cómo trabajamos?">
-                <h2>¿Cómo trabajamos?</h2>
+        <!-- Sección de Videos -->
+        <div id="videos" class="tab-content">
+            <h2>Videos Educativos</h2>
+            <div class="grid-contenido">
+                <div class="tarjeta-contenido">
+                    <div class="video-placeholder"></div>
+                    <h3>Tutorial de Matemáticas</h3>
+                    <button class="boton-accion">Ver video</button>
+                </div>
+                <div class="tarjeta-contenido">
+                    <div class="video-placeholder"></div>
+                    <h3>Estrategias de Enseñanza</h3>
+                    <button class="boton-accion">Ver video</button>
+                </div>
             </div>
         </div>
-    </main>
-</div>
 
-<!-- Página de Login -->
-<div id="login-page" class="hidden">
-    <div class="login-container">
-        <div class="logo-container">
-            <img src="./assets/images/logo.png" alt="Logo de la empresa">
+        <!-- Sección de Anuncios -->
+        <div id="anuncios" class="tab-content">
+            <h2>Anuncios Importantes</h2>
+            <div class="grid-contenido">
+                <div class="tarjeta-contenido">
+                    <h3>Nuevo Curso Disponible</h3>
+                    <p>Aprende nuevas metodologías de enseñanza</p>
+                    <button class="boton-accion">Leer más</button>
+                </div>
+                <div class="tarjeta-contenido">
+                    <h3>Próximo Evento</h3>
+                    <p>Conferencia sobre educación inclusiva</p>
+                    <button class="boton-accion">Más información</button>
+                </div>
+            </div>
         </div>
 
-        <form id="login-form">
-            <div class="input-group">
-                <input type="email" placeholder="Correo" required>
+        <!-- Sección de Cursos -->
+        <div id="cursos" class="tab-content">
+            <h2>Cursos Disponibles</h2>
+            <div class="grid-contenido">
+                <div class="tarjeta-contenido">
+                    <h3>Educación Inclusiva</h3>
+                    <p>Aprende estrategias para una educación más inclusiva</p>
+                    <button class="boton-accion">Ver curso</button>
+                </div>
+                <div class="tarjeta-contenido">
+                    <h3>Tecnología en el Aula</h3>
+                    <p>Herramientas digitales para la educación</p>
+                    <button class="boton-accion">Ver curso</button>
+                </div>
             </div>
-            <div class="input-group">
-                <input type="password" placeholder="Contraseña" required>
-            </div>
-
-            <div class="forgot-password">
-                <a href="#">¿Olvidaste tu contraseña?</a>
-            </div>
-
-            <button type="submit" class="login-button">Iniciar Sesión</button>
-
-            <div class="divider">
-                <span>iniciar sesión con</span>
-            </div>
-
-            <div class="social-login">
-                <img src="./assets/images/google-logo.png" alt="Google" class="social-icon">
-                <img src="./assets/images/apple-logo.png" alt="Apple" class="social-icon">
-                <img src="./assets/images/facebook-logo.png" alt="Facebook" class="social-icon">
-            </div>
-
-            <button type="button" class="back-button" onclick="showPage('main-page')">Volver</button>
-        </form>
-    </div>
-</div>
-
-<!-- Modales -->
-<!-- Modal para detalles de Sobre Nosotros -->
-<div id="details-modal" class="modal hidden">
-    <div class="modal-content">
-        <span class="close-button" onclick="closeModal('details-modal')">&times;</span>
-        <div id="modal-content-container"></div>
-    </div>
-</div>
-
-<!-- Modal para el foro -->
-<div id="forum-modal" class="modal hidden">
-    <div class="modal-content">
-        <span class="close-button" onclick="closeModal('forum-modal')">&times;</span>
-        <h2 id="forum-title">Título del Foro</h2>
-        <div class="forum-messages" id="forum-messages">
-            <!-- Los mensajes se cargarán dinámicamente -->
-        </div>
-        <div class="message-input">
-            <textarea placeholder="Escribe tu mensaje..."></textarea>
-            <button onclick="sendMessage()">Enviar</button>
         </div>
     </div>
 </div>
-
+<!-- Modal de Inicio de Sesión (inicialmente oculto) -->
+<div id="modal-inicio-sesion" class="modal-inicio-sesion">
+    <div class="contenido-modal">
+        <img src="./assets/images/logo.png" alt="Logo de la Empresa" class="logo-modal">
+        <div class="contenedor-input">
+            <input type="text" id="input-usuario" class="input-sesion" placeholder="Nombre de Usuario">
+            <input type="password" class="input-sesion" placeholder="Contraseña">
+        </div>
+        <button onclick="iniciarSesion()" class="boton-inicio-sesion">Iniciar Sesión</button>
+    </div>
+</div>
+<!--Nuevo modal de registro (después del modal de inicio de sesión):-->
+<div id="modal-registro" class="modal-inicio-sesion">
+    <div class="contenido-modal">
+        <img src="./assets/images/logo.png" alt="Logo de la Empresa" class="logo-modal">
+        <div class="contenedor-input">
+            <input type="text" id="input-registro-usuario" class="input-sesion" placeholder="Nombre de Usuario">
+            <input type="email" class="input-sesion" placeholder="Correo electrónico">
+            <input type="password" class="input-sesion" placeholder="Contraseña">
+            <input type="password" class="input-sesion" placeholder="Confirmar Contraseña">
+        </div>
+        <button onclick="registrarUsuario()" class="boton-inicio-sesion">Registrarse</button>
+    </div>
+</div>
 <script src="./assets/scripts/main.js"></script>
 </body>
 </html>

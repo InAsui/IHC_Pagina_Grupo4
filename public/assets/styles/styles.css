@@ -1,4 +1,4 @@
-/* Estilos generales */
+/* Estilos globales y reset */
 * {
     margin: 0;
     padding: 0;
@@ -6,492 +6,566 @@
 }
 
 body {
-    background: #5AABA5;
-    min-height: 100vh;
-    position: relative;
     font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #5AABA5, #C7DFCE);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Efecto de difuminado */
-body::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, transparent, #C7DFCE);
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* Estilos de navegación */
-nav {
+/* Estilos de la barra de navegación */
+.barra-navegacion {
     background-color: #91D3CF;
-    padding: 1rem;
     display: flex;
     justify-content: space-between;
+    padding: 15px 30px;
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: relative;
-    z-index: 1;
 }
 
-.nav-left, .nav-right {
+.navegacion-izquierda, .navegacion-derecha {
     display: flex;
-    gap: 1rem;
+    gap: 20px;
 }
 
-nav button {
-    background: transparent;
+.boton-nav {
+    background-color: #5AABA5;
+    color: white;
     border: none;
-    padding: 0.8rem 1.5rem;
+    padding: 8px 20px;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 1rem;
-    border-radius: 25px;
-    font-family: 'Roboto', sans-serif;
-    color: #fff;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
-nav button:hover {
-    background-color: rgba(90, 171, 165, 0.3);
-    transform: scale(1.05);
+.boton-nav:hover {
+    background-color: #478F89;
 }
-
-/* Estilos del contenido principal */
-.main-content {
+/* Estilos del contenedor principal */
+.contenedor-principal {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    min-height: calc(100vh - 70px);
-    gap: 2rem;
-    position: relative;
-    z-index: 1;
+    padding: 50px 20px;
 }
 
-.logo-container {
+.logo {
     max-width: 300px;
-    width: 100%;
-    margin: 2rem auto;
+    margin-bottom: 30px;
 }
 
-.logo-container img {
-    width: 100%;
-    height: auto;
-}
-
-.start-button {
+.boton-comenzar {
     background-color: #91D3CF;
-    color: white;
-    padding: 1rem 2.5rem;
-    font-size: 1.2rem;
+    color: #C7DFCE;
     border: none;
-    border-radius: 25px;
-    cursor: pointer;
     font-family: 'Inter', sans-serif;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.start-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-/* Estilos de la página de inicio */
-.home-content {
-    padding: 2rem;
-    position: relative;
-    z-index: 1;
-}
-
-.videos-section, .forums-section {
-    margin: 2rem 0;
-}
-
-.videos-section h2, .forums-section h2 {
-    color: white;
-    margin-bottom: 1.5rem;
-    font-size: 2rem;
-}
-
-.videos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 1rem;
-}
-
-.video-card {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.video-placeholder {
-    width: 100%;
-    padding-top: 56.25%; /* Aspecto 16:9 */
-    background: #e0e0e0;
-}
-
-.video-card h3 {
-    padding: 1rem;
-    color: #5AABA5;
-}
-
-.video-card p {
-    padding: 0 1rem 1rem;
-    color: #666;
-}
-
-/* Estilos de los foros */
-.forums-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 1rem;
-}
-
-.forum-card {
-    background: white;
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.forum-card h3 {
-    color: #5AABA5;
-    margin-bottom: 1rem;
-}
-
-.forum-card p {
-    color: #666;
-    margin-bottom: 0.5rem;
-}
-
-.replies {
-    display: block;
-    color: #91D3CF;
-    margin-bottom: 1rem;
-}
-
-.join-button {
-    background-color: #5AABA5;
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border: none;
+    font-size: 18px;
+    padding: 12px 30px;
     border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.join-button:hover {
-    background-color: #91D3CF;
-    transform: scale(1.05);
-}
-
-/* Estilos de Sobre Nosotros */
-.about-content {
-    padding: 2rem;
-    position: relative;
-    z-index: 1;
-}
-
-.info-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.card {
-    background: white;
-    border-radius: 15px;
-    padding: 2rem;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     cursor: pointer;
     transition: transform 0.3s ease;
 }
 
-.card:hover {
-    transform: translateY(-10px);
+.boton-comenzar:hover {
+    transform: scale(1.05);
 }
 
-.card img {
-    width: 120px;
-    height: 120px;
-    margin-bottom: 1rem;
-}
-
-.card h2 {
-    color: #5AABA5;
-    margin-top: 1rem;
-}
-
-/* Estilos de login */
-.login-container {
-    background: white;
-    padding: 2.5rem;
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    margin: 2rem auto;
-}
-
-.input-group {
-    margin-bottom: 1.5rem;
-    position: relative;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 0.8rem;
-    border: none;
-    border-bottom: 2px solid #92B89D;
-    font-size: 1rem;
-    outline: none;
-    background: transparent;
-}
-
-.input-group input::placeholder {
-    color: #92B89D;
-    opacity: 0.6;
-}
-
-.input-group.focused input::placeholder {
-    opacity: 0;
-}
-
-.forgot-password {
-    text-align: right;
-    margin-bottom: 1.5rem;
-}
-
-.forgot-password a {
-    color: #5AABA5;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
-
-.login-button {
-    background-color: #5AABA5;
-    color: white;
-    padding: 0.8rem 2rem;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
-    transition: all 0.3s ease;
-}
-
-.login-button:hover {
-    background-color: #91D3CF;
-}
-
-/* Estilos para modales */
-.modal {
+/* Estilos del modal de inicio de sesión */
+.modal-inicio-sesion {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.7);
-    display: flex;
+    background-color: rgba(0, 0, 0, 0.5);
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
-.modal-content {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    max-width: 600px;
-    width: 90%;
-    max-height: 80vh;
-    overflow-y: auto;
-    position: relative;
-}
-
-.close-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #5AABA5;
-}
-
-/* Estilos para el modal del foro */
-.forum-messages {
-    margin: 1rem 0;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-.forum-message {
-    background: #f5f5f5;
-    border-radius: 10px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-}
-
-.message-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-    color: #666;
-    font-size: 0.9rem;
-}
-
-.message-input {
-    margin-top: 1rem;
-}
-
-.message-input textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-    resize: vertical;
-    min-height: 100px;
-}
-
-.message-input button {
+.contenido-modal {
     background-color: #5AABA5;
-    color: white;
-    padding: 0.8rem 2rem;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    width: 400px;
 }
 
-.message-input button:hover {
-    background-color: #91D3CF;
+.logo-modal {
+    max-width: 200px;
+    margin-bottom: 30px;
 }
 
-/* Utilidades */
-.hidden {
-    display: none !important;
-}
-
-/* Diseño responsivo */
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem 0.5rem;
-    }
-
-    .nav-left, .nav-right {
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .main-content {
-        padding: 1rem;
-    }
-
-    .logo-container {
-        max-width: 200px;
-    }
-
-    .info-cards {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-    }
-
-    .videos-grid, .forums-container {
-        grid-template-columns: 1fr;
-    }
-
-    .modal-content {
-        width: 95%;
-        margin: 1rem;
-        padding: 1.5rem;
-    }
-}
-
-/* Animaciones */
-@keyframes slideIn {
-    from {
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.modal-content {
-    animation: slideIn 0.3s ease-out;
-}
-
-/* Estilos para el divisor social */
-.divider {
+.contenedor-input {
     display: flex;
-    align-items: center;
-    margin: 2rem 0;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
-.divider::before,
-.divider::after {
-    content: "";
-    flex: 1;
-    border-bottom: 1px solid #92B89D;
+.input-sesion {
+    background-color: #92B89D;
+    border: none;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 16px;
 }
 
-.divider span {
-    padding: 0 10px;
-    color: #92B89D;
-    font-size: 0.9rem;
+.input-sesion::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    opacity: 0.7;
 }
 
-/* Estilos para iconos sociales */
-.social-login {
+.texto-recuperacion {
+    color: #C7DFCE;
+    font-size: 14px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.separador {
+    height: 1px;
+    background-color: #C7DFCE;
+    margin: 20px 0;
+}
+
+.texto-iniciar-con {
+    color: #C7DFCE;
+    margin-bottom: 20px;
+}
+
+.contenedor-logos-externos {
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin: 1.5rem 0;
+    gap: 20px;
 }
 
-.social-icon {
-    width: 40px;
-    height: 40px;
+.logo-externo {
+    width: 50px;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
 
-.social-icon:hover {
+.logo-externo:hover {
     transform: scale(1.1);
 }
+/*Estilos para el modal de registro*/
+#modal-registro {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .barra-navegacion {
+        flex-direction: column;
+        gap: 10px;
+    }
 
-.back-button {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
+    .navegacion-izquierda, .navegacion-derecha {
+        width: 100%;
+        justify-content: center;
+    }
+}
+/* Agregamos nuevos estilos al CSS anterior */
+
+.contenedor-usuario {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+}
+
+.icono-usuario {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.barra-lateral {
+    position: fixed;
+    left: -300px;  /* Inicialmente oculta */
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #91D3CF;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    padding: 20px;
+    color: white;
+}
+
+.barra-lateral.activa {
+    left: 0;
+}
+
+.logo-barra-lateral {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.texto-incluteach {
+    font-family: 'Inter', sans-serif;
+    margin-top: 10px;
+}
+
+.opciones-barra-lateral {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.opciones-barra-lateral button {
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.opciones-barra-lateral button:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.secciones-contenido .seccion {
+    display: none;
+    padding: 20px;
+}
+
+.secciones-contenido .seccion.activa {
+    display: block;
+}
+
+.grupo-ajustes {
+    margin-bottom: 20px;
+}
+
+/* Modo oscuro */
+body.modo-oscuro {
+    background: linear-gradient(to bottom, #2C3E50, #34495E);
+    color: white;
+}
+.boton-inicio-sesion, .boton-registro {
+    background-color: #5AABA5;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-inicio-sesion:hover, .boton-registro:hover {
+    background-color: #478F89;
+}
+
+/* Ajuste para ambos modales */
+#modal-inicio-sesion, #modal-registro {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.contenido-modal {
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.input-sesion {
+    border: 1px solid #ddd;
+    color: #333;
+    width: 100%;
+}
+/* Estilos para barras laterales anidadas */
+.barra-lateral-secundaria {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #92B89D;
+    transition: left 0.3s ease;
+    z-index: 999;
+    padding: 20px;
+    color: white;
+}
+
+.barra-lateral-secundaria.activa {
+    left: 300px; /* Se posiciona junto a la barra lateral principal */
+}
+
+/* Estilos para los botones de las opciones */
+.opcion-ajuste {
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background-color 0.3s;
+}
+
+.opcion-ajuste:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.mensaje-pronta-funcion {
+    padding: 10px;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+}
+/* Añadir al final del archivo CSS */
+.sobre-nosotros-seccion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 20px;
+    min-height: calc(100vh - 70px); /* Ajustar según la altura de tu barra de navegación */
+    background: linear-gradient(to bottom, #5AABA5, #C7DFCE);
+}
+
+.recuadros-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.recuadro {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.recuadro:hover {
+    transform: translateY(-5px);
+}
+
+.recuadro-imagen {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.recuadro h3 {
+    color: #5AABA5;
+    font-size: 1.2em;
+}
+
+.modal-informacion {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenido-modal-informacion {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #5AABA5;
+}
+
+#titulo-modal-informacion {
+    color: #5AABA5;
+    margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .recuadros-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .recuadro {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+/* Estilos para la sección de contenido principal */
+.contenido-principal-seccion {
+    min-height: calc(100vh - 70px);
+    background: linear-gradient(to bottom, #5AABA5, #C7DFCE);
+    padding: 20px;
+}
+
+.contenido-navegacion {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.tab-button {
     background-color: #91D3CF;
     color: white;
     border: none;
+    padding: 12px 25px;
     border-radius: 25px;
     cursor: pointer;
-    font-family: 'Roboto', sans-serif;
-    transition: all 0.3s ease;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
 }
 
-.back-button:hover {
+.tab-button:hover {
     background-color: #5AABA5;
+}
+
+.tab-button.active {
+    background-color: #5AABA5;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.grid-contenido {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.tarjeta-contenido {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.tarjeta-contenido:hover {
+    transform: translateY(-5px);
+}
+
+.tarjeta-contenido h3 {
+    color: #5AABA5;
+    margin-bottom: 10px;
+}
+
+.video-placeholder {
+    background-color: #91D3CF;
+    height: 180px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.boton-accion {
+    background-color: #5AABA5;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.boton-accion:hover {
+    background-color: #478F89;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contenido-navegacion {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tab-button {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+body.modo-oscuro {
+    background: linear-gradient(to bottom, #1a1a1a, #2d2d2d);
+    color: #ffffff;
+}
+
+body.modo-oscuro .barra-navegacion {
+    background-color: #333333;
+}
+
+body.modo-oscuro .boton-nav {
+    background-color: #444444;
+}
+
+body.modo-oscuro .contenido-modal {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+body.modo-oscuro .input-sesion {
+    background-color: #444444;
+    color: #ffffff;
+}
+
+body.modo-oscuro .tarjeta-contenido {
+    background-color: #333333;
+    color: #ffffff;
+}
+.barra-lateral-secundaria {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background-color: #92B89D;
+    transition: left 0.3s ease;
+    z-index: 999;
+    padding: 20px;
+    color: white;
+}
+
+.barra-lateral-secundaria.activa {
+    left: 300px; /* Se posiciona junto a la barra lateral principal */
 }

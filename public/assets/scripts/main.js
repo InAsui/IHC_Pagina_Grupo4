@@ -1,153 +1,345 @@
-// Gestión de páginas
-function showPage(pageId) {
-    // Ocultar todas las páginas
-    const pages = ['main-page', 'home-page', 'about-page', 'login-page'];
-    pages.forEach(page => {
-        const element = document.getElementById(page);
-        if (element) {
-            element.classList.add('hidden');
-        }
+// Almacenamiento de usuarios
+let usuarios = [];
+
+// Función para mostrar el modal de inicio de sesión
+function mostrarInicioSesion() {
+    const modal = document.getElementById('modal-inicio-sesion');
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.style.opacity = '1';
+    }, 10);
+}
+
+// Función para cerrar el modal de inicio de sesión
+function cerrarInicioSesion() {
+    const modal = document.getElementById('modal-inicio-sesion');
+    modal.style.opacity = '0';
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
+
+// Función para mostrar el modal de registro
+function mostrarRegistro() {
+    const modal = document.getElementById('modal-registro');
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.style.opacity = '1';
+    }, 10);
+}
+
+// Función para cerrar el modal de registro
+function cerrarRegistro() {
+    const modal = document.getElementById('modal-registro');
+    modal.style.opacity = '0';
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 300);
+}
+
+// Función para mostrar la página principal (inicio)
+function mostrarInicio() {
+    document.querySelector('.contenedor-principal').style.display = 'flex';
+    document.querySelector('.sobre-nosotros-seccion').style.display = 'none';
+    document.querySelector('.contenido-principal-seccion').style.display = 'none';
+}
+
+// Función para mostrar la sección Sobre Nosotros
+function mostrarSobreNosotros() {
+    document.querySelector('.contenedor-principal').style.display = 'none';
+    document.querySelector('.sobre-nosotros-seccion').style.display = 'flex';
+    document.querySelector('.contenido-principal-seccion').style.display = 'none';
+}
+
+// Nueva función para mostrar la sección de contenido principal
+function mostrarContenidoPrincipal() {
+    document.querySelector('.contenedor-principal').style.display = 'none';
+    document.querySelector('.sobre-nosotros-seccion').style.display = 'none';
+    document.querySelector('.contenido-principal-seccion').style.display = 'block';
+}
+
+// Función para cambiar entre tabs en la sección de contenido principal
+function cambiarTab(tabId) {
+    // Remover clase active de todos los botones y contenidos
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
     });
 
-    // Mostrar la página solicitada
-    const pageToShow = document.getElementById(pageId);
-    if (pageToShow) {
-        pageToShow.classList.remove('hidden');
-    }
+    // Agregar clase active al botón y contenido seleccionado
+    document.querySelector(`button[onclick="cambiarTab('${tabId}')"]`).classList.add('active');
+    document.getElementById(tabId).classList.add('active');
 }
 
-// Gestión de login
-const loginButtons = document.querySelectorAll('#login-btn, #login-btn-home, #login-btn-about');
-loginButtons.forEach(btn => {
-    btn.addEventListener('click', () => showPage('login-page'));
-});
+// Función para iniciar sesión
+function iniciarSesion() {
+    const usuario = document.getElementById('input-usuario').value;
+    const contrasena = document.querySelector('#modal-inicio-sesion input[type="password"]').value;
 
-// Gestión de modales
-function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    modal.classList.remove('hidden');
-}
+    // Buscar usuario en el array
+    const usuarioEncontrado = usuarios.find(u =>
+        (u.usuario === usuario || u.email === usuario) && u.contrasena === contrasena
+    );
 
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    modal.classList.add('hidden');
-}
+    if (usuarioEncontrado) {
+        localStorage.setItem('nombreUsuario', usuarioEncontrado.usuario);
+        document.getElementById('nombre-usuario').textContent = usuarioEncontrado.usuario;
+        cerrarInicioSesion();
 
-// Contenido de "Sobre Nosotros"
-const aboutContent = {
-    'quienes-somos': {
-        title: '¿Quiénes somos?',
-        content: 'Aquí va el contenido sobre quiénes somos...'
-    },
-    'que-buscamos': {
-        title: '¿Qué buscamos?',
-        content: 'Aquí va el contenido sobre qué buscamos...'
-    },
-    'como-trabajamos': {
-        title: '¿Cómo trabajamos?',
-        content: 'Aquí va el contenido sobre cómo trabajamos...'
-    }
-};
-
-function showDetails(section) {
-    const content = aboutContent[section];
-    const container = document.getElementById('modal-content-container');
-    container.innerHTML = `
-        <h2>${content.title}</h2>
-        <div class="content">
-            ${content.content}
-        </div>
-    `;
-    openModal('details-modal');
-}
-
-// Gestión de foros
-let currentForumId = null;
-const forumData = {
-    1: {
-        title: 'Tema del Foro 1',
-        messages: [
-            { user: 'Usuario1', message: 'Primer mensaje del foro', timestamp: '2024-01-01 10:00' },
-            { user: 'Usuario2', message: 'Respuesta al primer mensaje', timestamp: '2024-01-01 10:05' }
-        ]
-    },
-    2: {
-        title: 'Tema del Foro 2',
-        messages: [
-            { user: 'Usuario3', message: 'Iniciando nueva discusión', timestamp: '2024-01-02 15:00' }
-        ]
-    }
-};
-
-function openForum(forumId) {
-    currentForumId = forumId;
-    const forum = forumData[forumId];
-    document.getElementById('forum-title').textContent = forum.title;
-    updateForumMessages();
-    openModal('forum-modal');
-}
-
-function updateForumMessages() {
-    const messagesContainer = document.getElementById('forum-messages');
-    const forum = forumData[currentForumId];
-
-    messagesContainer.innerHTML = forum.messages.map(msg => `
-        <div class="forum-message">
-            <div class="message-header">
-                <span class="user">${msg.user}</span>
-                <span class="timestamp">${msg.timestamp}</span>
-            </div>
-            <div class="message-content">${msg.message}</div>
-        </div>
-    `).join('');
-}
-
-function sendMessage() {
-    const textarea = document.querySelector('.message-input textarea');
-    const message = textarea.value.trim();
-
-    if (message && currentForumId) {
-        const newMessage = {
-            user: 'Usuario Actual', // Esto debería venir de un sistema de autenticación
-            message: message,
-            timestamp: new Date().toLocaleString()
-        };
-
-        forumData[currentForumId].messages.push(newMessage);
-        updateForumMessages();
-        textarea.value = '';
-    }
-}
-
-// Inicialización
-document.addEventListener('DOMContentLoaded', () => {
-    // Manejo de clics fuera de los modales
-    window.addEventListener('click', (e) => {
-        const modals = document.querySelectorAll('.modal');
-        modals.forEach(modal => {
-            if (e.target === modal) {
-                modal.classList.add('hidden');
+        // Mostrar contenedor de usuario y ocultar botones de login/registro
+        document.querySelector('.contenedor-usuario').style.display = 'flex';
+        document.querySelectorAll('.boton-nav').forEach(btn => {
+            if (btn.textContent === 'Iniciar sesión' || btn.textContent === 'Registrarse') {
+                btn.style.display = 'none';
             }
         });
-    });
+    } else {
+        alert('Usuario o contraseña incorrectos');
+    }
+}
 
-    // Inicializar la página principal
-    showPage('main-page');
-});
+// Función para registrar usuario
+function registrarUsuario() {
+    const usuario = document.getElementById('input-registro-usuario').value;
+    const email = document.querySelector('#modal-registro input[type="email"]').value;
+    const contrasena = document.querySelector('#modal-registro input[type="password"]').value;
+    const confirmarContrasena = document.querySelectorAll('#modal-registro input[type="password"]')[1].value;
 
-// Animaciones para campos de entrada
-document.querySelectorAll('.input-group input').forEach(input => {
-    input.addEventListener('focus', function() {
-        this.parentElement.classList.add('focused');
-    });
+    if (usuario && email && contrasena && confirmarContrasena) {
+        // Verificar si el usuario ya existe
+        if (usuarios.find(u => u.usuario === usuario || u.email === email)) {
+            alert('El usuario o email ya está registrado');
+            return;
+        }
 
-    input.addEventListener('blur', function() {
-        if (!this.value) {
-            this.parentElement.classList.remove('focused');
+        if (contrasena === confirmarContrasena) {
+            // Agregar usuario al array
+            usuarios.push({
+                usuario: usuario,
+                email: email,
+                contrasena: contrasena
+            });
+
+            alert('Registro exitoso. Por favor inicie sesión.');
+            cerrarRegistro();
+            mostrarInicioSesion();
+        } else {
+            alert('Las contraseñas no coinciden');
+        }
+    } else {
+        alert('Por favor, complete todos los campos');
+    }
+}
+
+// Actualizar la función toggleBarraLateral
+function toggleBarraLateral() {
+    const barraLateral = document.getElementById('barra-lateral');
+    const barraAjustes = document.getElementById('barra-ajustes');
+
+    if (barraLateral.classList.contains('activa')) {
+        barraLateral.classList.remove('activa');
+        barraAjustes.classList.remove('activa');
+    } else {
+        barraLateral.classList.add('activa');
+    }
+}
+
+// Función para alternar modo oscuro (agregar nueva)
+function toggleModoOscuro() {
+    document.body.classList.toggle('modo-oscuro');
+    const modoOscuroActivo = document.body.classList.contains('modo-oscuro');
+    localStorage.setItem('modoOscuro', modoOscuroActivo);
+}
+
+// Función para mostrar barra lateral de ajustes
+function mostrarBarraAjustes() {
+    // Asegurarse de que la barra lateral principal esté activa
+    document.getElementById('barra-lateral').classList.add('activa');
+
+    // Mostrar la barra de ajustes
+    const barraAjustes = document.getElementById('barra-ajustes');
+    barraAjustes.classList.add('activa');
+}
+
+// Función para manejar opciones de ajustes
+function mostrarOpcionAjuste(opcion) {
+    const mensaje = document.createElement('div');
+    mensaje.className = 'mensaje-pronta-funcion';
+    mensaje.textContent = 'Próxima función';
+
+    // Remover mensajes anteriores si existen
+    const mensajesAnteriores = document.querySelectorAll('.mensaje-pronta-funcion');
+    mensajesAnteriores.forEach(m => m.remove());
+
+    // Agregar el nuevo mensaje
+    document.getElementById('barra-ajustes').appendChild(mensaje);
+
+    // Eliminar el mensaje después de 2 segundos
+    setTimeout(() => {
+        mensaje.remove();
+    }, 2000);
+}
+
+// Función para cerrar sesión
+function cerrarSesion() {
+    localStorage.removeItem('nombreUsuario');
+    localStorage.removeItem('modoOscuro');
+    document.body.classList.remove('modo-oscuro');
+    document.querySelector('.contenedor-usuario').style.display = 'none';
+    document.querySelectorAll('.boton-nav').forEach(btn => {
+        if (btn.textContent === 'Iniciar sesión' || btn.textContent === 'Registrarse') {
+            btn.style.display = 'block';
         }
     });
 
-    input.addEventListener('input', function() {
-        this.parentElement.classList.toggle('has-text', this.value.length > 0);
+    // Cerrar barras laterales
+    document.getElementById('barra-lateral').classList.remove('activa');
+    document.getElementById('barra-ajustes').classList.remove('activa');
+
+    // Volver a la página de inicio
+    mostrarInicio();
+}
+
+
+// Función para mostrar información en el modal
+function mostrarInformacion(tipo) {
+    const modal = document.getElementById('modal-informacion');
+    const titulo = document.getElementById('titulo-modal-informacion');
+    const contenido = document.getElementById('contenido-modal-informacion');
+
+    const informacion = {
+        'quienes-somos': {
+            titulo: '¿Quiénes somos?',
+            contenido: 'Contenido pendiente...'
+        },
+        'que-buscamos': {
+            titulo: '¿Qué buscamos?',
+            contenido: 'Contenido pendiente...'
+        },
+        'como-trabajamos': {
+            titulo: '¿Cómo trabajamos?',
+            contenido: 'Contenido pendiente...'
+        }
+    };
+
+    titulo.textContent = informacion[tipo].titulo;
+    contenido.textContent = informacion[tipo].contenido;
+    modal.style.display = 'flex';
+}
+
+// Función para cerrar el modal de información
+function cerrarModalInformacion() {
+    document.getElementById('modal-informacion').style.display = 'none';
+}
+
+// Función para mostrar secciones y manejar la barra lateral secundaria
+function mostrarSeccion(seccion) {
+    // Ocultar todas las secciones primero
+    document.querySelectorAll('.seccion').forEach(s => {
+        s.classList.remove('activa');
     });
+
+    // Si la sección es "ajustes", mostrar la barra lateral secundaria
+    const barraAjustes = document.getElementById('barra-ajustes');
+    if (seccion === 'ajustes') {
+        barraAjustes.classList.add('activa');
+    } else {
+        barraAjustes.classList.remove('activa');
+        // Mostrar la sección seleccionada
+        const seccionActual = document.getElementById(seccion);
+        if (seccionActual) {
+            seccionActual.classList.add('activa');
+        }
+    }
+}
+
+// Función para cerrar barras laterales
+function cerrarBarrasLaterales() {
+    document.getElementById('barra-lateral').classList.remove('activa');
+    document.getElementById('barra-ajustes').classList.remove('activa');
+}
+
+// Función para manejar el cierre de barras laterales al hacer clic fuera
+document.addEventListener('click', function(event) {
+    const barraLateral = document.getElementById('barra-lateral');
+    const barraAjustes = document.getElementById('barra-ajustes');
+    const contenedorUsuario = document.querySelector('.contenedor-usuario');
+
+    // Si el clic no fue en las barras laterales ni en el contenedor de usuario
+    if (!barraLateral.contains(event.target) &&
+        !barraAjustes.contains(event.target) &&
+        !contenedorUsuario.contains(event.target)) {
+        cerrarBarrasLaterales();
+    }
+});
+
+// Event Listeners
+document.addEventListener('DOMContentLoaded', () => {
+    // Limpiar localStorage al inicio
+    localStorage.clear();
+    const contenedorUsuario = document.querySelector('.contenedor-usuario');
+    contenedorUsuario.style.display = 'none';
+
+    // Mostrar botones de inicio de sesión y registro
+    document.querySelectorAll('.boton-nav').forEach(btn => {
+        if (btn.textContent === 'Iniciar sesión' || btn.textContent === 'Registrarse') {
+            btn.style.display = 'block';
+        }
+    });
+
+    // Asignar evento al botón comenzar
+    document.querySelector('.boton-comenzar').addEventListener('click', mostrarContenidoPrincipal);
+
+    // Mostrar página de inicio por defecto
+    mostrarInicio();
+});
+
+// Event listeners para cerrar modales al hacer clic fuera
+document.getElementById('modal-inicio-sesion').addEventListener('click', function(event) {
+    if (event.target === this) {
+        cerrarInicioSesion();
+    }
+});
+
+document.getElementById('modal-registro').addEventListener('click', function(event) {
+    if (event.target === this) {
+        cerrarRegistro();
+    }
+});
+
+document.getElementById('modal-informacion').addEventListener('click', function(event) {
+    if (event.target === this) {
+        cerrarModalInformacion();
+    }
+});
+
+// Event Listeners (agregar al final del archivo JavaScript)
+/*document.addEventListener('DOMContentLoaded', () => {
+    // Verificar modo oscuro guardado
+    const modoOscuro = localStorage.getItem('modoOscuro');
+    if (modoOscuro === 'true') {
+        document.body.classList.add('modo-oscuro');
+    }
+
+    // Configurar toggle de modo oscuro
+    const toggleModoOscuroCheckbox = document.getElementById('toggle-modo-oscuro');
+    if (toggleModoOscuroCheckbox) {
+        toggleModoOscuroCheckbox.checked = modoOscuro === 'true';
+        toggleModoOscuroCheckbox.addEventListener('change', toggleModoOscuro);
+    }
+});*/
+// Event Listener para el checkbox de modo oscuro
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleModoOscuroCheckbox = document.getElementById('toggle-modo-oscuro');
+    if (toggleModoOscuroCheckbox) {
+        // Verificar el estado guardado del modo oscuro
+        const modoOscuro = localStorage.getItem('modoOscuro') === 'true';
+        toggleModoOscuroCheckbox.checked = modoOscuro;
+        document.body.classList.toggle('modo-oscuro', modoOscuro);
+
+        // Agregar event listener para el cambio
+        toggleModoOscuroCheckbox.addEventListener('change', toggleModoOscuro);
+    }
 });
