@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Página Web</title>
-    <!-- Enlace a fuentes de Google -->
+    <!-- Los enlaces a las fuentes de Google -->
     <link href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="./assets/styles/styles.css">
 </head>
 <body>
-<!-- Barra de navegación superior -->
+<!-- La barra de navegación principal, en la parte superior -->
 <nav class="barra-navegacion">
     <div class="navegacion-izquierda">
         <button class="boton-nav" onclick="mostrarInicio()">Inicio</button>
@@ -25,7 +25,7 @@
         </div>
     </div>
 </nav>
-<!-- NUEVO: Barra Lateral de Navegación -->
+<!-- La barra lateral desplegable del usuario -->
 <div class="barra-lateral" id="barra-lateral">
     <div class="logo-barra-lateral">
         <img src="logo.png" alt="Logo Incluteach">
@@ -84,7 +84,7 @@
         </div>
     </div>
 </div>
-<!-- Barra lateral secundaria para ajustes -->
+<!-- La barra secundaria destinada a los ajustes del usuario -->
 <div class="barra-lateral-secundaria" id="barra-ajustes">
     <div class="opciones-barra-lateral">
         <div class="opcion-ajuste">
@@ -112,7 +112,7 @@
         </button>
     </div>
 </div>
-<!-- Contenedor principal -->
+<!-- Contenido principal de la pagina -->
 <div class="contenedor-principal">
     <!-- Logo -->
     <img src="./assets/images/logo.png" alt="Logo de la Empresa" class="logo">
@@ -120,7 +120,7 @@
     <!-- Botón Comenzar -->
     <button class="boton-comenzar">Comenzar</button>
 </div>
-<!--Sobre Nosotros Wa -->
+<!-- Apartado sobre nosotros -->
 <div class="sobre-nosotros-seccion" style="display: none;">
     <img src="./assets/images/logo.png" alt="Logo de la Empresa" class="logo">
     <div class="recuadros-container">
@@ -146,7 +146,6 @@
         </div>
     </div>
 </div>
-<!-- Agregar después de la sección "sobre-nosotros-seccion" y antes de los modales -->
 <div class="contenido-principal-seccion" style="display: none;">
     <div class="contenido-navegacion">
         <button class="tab-button active" onclick="cambiarTab('foros')">Foros</button>
@@ -160,7 +159,6 @@
         <div id="foros" class="tab-content active">
             <h2>Foros de Discusión</h2>
             <div class="grid-contenido">
-                <!-- Ejemplo de estructura de foro -->
                 <div class="tarjeta-contenido">
                     <h3>Foro de Matemáticas</h3>
                     <p>Discusiones sobre métodos de enseñanza en matemáticas</p>
