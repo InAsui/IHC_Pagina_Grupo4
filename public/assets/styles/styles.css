@@ -4,7 +4,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+/* Estilos de cuerpo */
 body {
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(to bottom, #5AABA5, #C7DFCE);
@@ -553,6 +553,15 @@ body.modo-oscuro .tarjeta-contenido {
     background-color: #333333;
     color: #ffffff;
 }
+
+/* Modo oscuro adaptado */
+body.modo-oscuro .pie-pagina {
+    background-color: #333333;
+}
+
+body.modo-oscuro .derechos {
+    color: rgba(255, 255, 255, 0.8);
+}
 .barra-lateral-secundaria {
     position: fixed;
     left: -300px;
@@ -565,7 +574,6 @@ body.modo-oscuro .tarjeta-contenido {
     padding: 20px;
     color: white;
 }
-
 .barra-lateral-secundaria.activa {
     left: 300px; /* Se posiciona junto a la barra lateral principal */
 }
