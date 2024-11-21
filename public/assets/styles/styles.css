@@ -7,7 +7,7 @@
 /* Estilos de cuerpo */
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to bottom, #5AABA5, #C7DFCE);
+    background: linear-gradient(to bottom, #ffffff, #9cdfda);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -15,7 +15,7 @@ body {
 
 /* Estilos de la barra de navegación */
 .barra-navegacion {
-    background-color: #91D3CF;
+    background-color: #09645e;
     display: flex;
     justify-content: space-between;
     padding: 15px 30px;
@@ -28,7 +28,7 @@ body {
 }
 
 .boton-nav {
-    background-color: #5AABA5;
+    background-color: #0ca195;
     color: white;
     border: none;
     padding: 8px 20px;
@@ -56,8 +56,8 @@ body {
 }
 
 .boton-comenzar {
-    background-color: #91D3CF;
-    color: #C7DFCE;
+    background-color: #478F89;
+    color: #f7f7f7;
     border: none;
     font-family: 'Inter', sans-serif;
     font-size: 18px;
